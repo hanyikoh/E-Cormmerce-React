@@ -43,4 +43,65 @@ GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
 
+##Sign In with Email & Password
+###1. Set up a InputForm component to get for user input
+const FormInput = ({handleChange, label, ...otherProps}) => {
+    return (
+        <div className="formRow">
+            {label && (
+                <label>
+                    {label}
+                </label>
+            )}
+
+            <input type="formInput" onChange={handleChange} {...otherProps}/>
+        </div>
+    )
+}
+###2. Get user password & email
+const initialState = {
+  email: '',
+  password: ''
+}
+
+class SignIn extends Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        ...initialState
+      }
+
+      this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e){
+      const {name, value} = e.target;
+      this.setState({
+        [name]: value
+      })
+    }
+<form onSubmit={this.handleSubmit}>
+
+                <FormInput
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Email"
+                  handleChange={this.handleChange}
+                />
+                ....
+###3. Sign in with Auth Function
+handleSubmit = async (e) => {
+      e.preventDefault();
+      const {email, password} = this.state;
+
+      try{
+        await auth.signInWithEmailAndPassword(email, password);
+        this.setState({
+          ...initialState
+        })
+      }catch(error){
+        
+      }
+    }
 
