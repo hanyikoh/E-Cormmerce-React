@@ -10,29 +10,29 @@ export const firestore = firebase.firestore();
 
 const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
+export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider)
 
-export const handleUserProfile = async ( userAuth, additionalData ) => {
-    if(!userAuth) return;
-    const {uid} = userAuth;
+export const handleUserProfile = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+    const { uid } = userAuth;
 
     const userRef = firestore.doc(`users/${uid}`)
     //it will return a user reference on the document uid
     //so now the userRef is referring to the document
     const snapshot = userRef.get();
 
-    if(!snapshot.exists){
-        const {displayName, email} = userAuth;
+    if (!snapshot.exists) {
+        const { displayName, email } = userAuth;
         const timestamp = new Date();
 
-        try{
+        try {
             await userRef.set({
                 displayName,
                 email,
                 createdDate: timestamp,
                 ...additionalData
             })
-        }catch(err){
+        } catch (err) {
 
         }
     }
