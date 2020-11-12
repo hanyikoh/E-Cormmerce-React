@@ -4,10 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-###Google Authentication & Login
-##1. Install Firebase
-'''npm install firebase
-##2. Copy over the firebase config
+### Google Authentication & Login
+## 1. Install Firebase
+''' npm install firebase
+
+## 2. Copy over the firebase config
 export const firebaseConfig = {
     apiKey: "A2i2ie2oehodhod3bk3boi3oqwg3",
     authDomain: "ecommerce2321321.com,
@@ -18,9 +19,11 @@ export const firebaseConfig = {
     appId: "1:563321321321213rewd2321e",
     measurementId: "G-52321r21213"
   };
-##3. Initialize the App with above config
+
+## 3. Initialize the App with above config
 firebase.initializeApp(firebaseConfig);
-##4 Sign In with Google Configuration
+
+## 4 Sign In with Google Configuration
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
