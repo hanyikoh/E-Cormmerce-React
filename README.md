@@ -45,9 +45,9 @@ export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
 
 
 
-##Sign In with Email & Password
+## Sign In with Email & Password
 
-###1. Set up a InputForm component to get for user input
+### 1. Set up a InputForm component to get for user input
 const FormInput = ({handleChange, label, ...otherProps}) => {
     return (
         <div className="formRow">
@@ -63,7 +63,7 @@ const FormInput = ({handleChange, label, ...otherProps}) => {
 }
 
 
-###2. Get user password & email
+### 2. Get user password & email
 const initialState = {
   email: '',
   password: ''
@@ -97,7 +97,7 @@ class SignIn extends Component {
                 ....
 
 
-###3. Sign in with Auth Function
+### 3. Sign in with Auth Function
 handleSubmit = async (e) => {
       e.preventDefault();
       const {email, password} = this.state;
