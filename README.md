@@ -44,8 +44,8 @@ GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
 
 
-##Sign In with Email & Password
 
+##Sign In with Email & Password
 
 ###1. Set up a InputForm component to get for user input
 const FormInput = ({handleChange, label, ...otherProps}) => {
