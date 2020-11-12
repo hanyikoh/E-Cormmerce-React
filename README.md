@@ -11,13 +11,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### 2. Copy over the firebase config
 export const firebaseConfig = {
     apiKey: "A2i2ie2oehodhod3bk3boi3oqwg3",
+
     authDomain: "ecommerce2321321.com,
+
     databaseURL: "httpswdqwewq.com",
+
     projectId: "ecomm22221232",
+
     storageBucket: "ecom323213",
+
     messagingSenderId: "5232132132",
+
     appId: "1:563321321321213rewd2321e",
+
     measurementId: "G-52321r21213"
+
   };
 
 ### 3. Initialize the App with above config
@@ -25,9 +33,14 @@ firebase.initializeApp(firebaseConfig);
 
 ### 4 Sign In with Google Configuration
 export const auth = firebase.auth();
+
 export const firestore = firebase.firestore();
 
+
 const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+
 GoogleProvider.setCustomParameters({ prompt: 'select_account' });
+
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
+
 
