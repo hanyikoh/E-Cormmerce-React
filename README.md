@@ -112,3 +112,68 @@ handleSubmit = async (e) => {
       }
     }
 
+### Redux
+## 1. Install Redux
+``` npm install redux react-redux redux-logger```
+we use redux-logger as our middle ware so that we can view all the process and actions in our console
+## 2. Set Up a Redux Store
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+
+import rootReducer from './rootReducer';
+
+export const middlewares = [logger];
+
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+export default store;
+## 3. Create User Action
+const userTypes = {
+    SET_CURRENT_USER: "SET_CURRENT_USER"
+}
+
+export default userTypes
+## 4. Create Dispatcher
+import userTypes from './userTypes'
+
+export const setCurrentUser = user => ({
+    type: userTypes.SET_CURRENT_USER,
+    payload:user
+})
+## 5. Create Reducer
+import userTypes from './userTypes'
+
+const INITIAL_STATE = {
+    currentUser: null
+}
+
+const userReducer = (state=INITIAL_STATE, action) => {
+    switch(action.type) {
+        case userTypes.SET_CURRENT_USER:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+export default userReducer;
+## 6.Connect it with other components
+```const { currentUser } = this.props;
+... Other
+... Codes
+... Place Here
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);```
+
+ 
+
