@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import './default.scss'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
@@ -7,29 +7,25 @@ import Registration from './pages/Registration/index'
 import MainLayout from './layouts/MainLayout'
 import HomepageLayout from './layouts/HomepageLayout'
 import Login from './pages/Login/index'
-import {auth, handleUserProfile} from './firebase/utils'
+import { auth, handleUserProfile } from './firebase/utils'
 import Recovery from './pages/Recovery/index'
 
-import {connect} from 'react-redux'
-import {setCurrentUser} from './redux/User/uerActions'
+import { connect } from 'react-redux'
+import { setCurrentUser } from './redux/User/uerActions'
+import Dashboard from './pages/Dashboard'
+import WithAuth from './hoc/WithAuth'
 
 
-class App extends Component {
+const App = (props) => {
+  const { setCurrentUser, currentUser } = props;
 
-  authListener = null;
-
-  componentDidMount(){
-    const {setCurrentUser} = this.props;
-    this.authListener = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth){
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged(async userAuth => {
+      //from onAuthStateChanged, firebase will return a function that's why authListrener is 
+      //declared as function here 
+      if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
         userRef.onSnapshot(snapshot => {
-          // this.setState({
-          //   currentUser:{
-          //     id: snapshot.id,
-          //     ...snapshot.data()
-          //   }
-          // })
           setCurrentUser({
             id: snapshot.id,
             ...snapshot.data()
@@ -38,48 +34,51 @@ class App extends Component {
       };
 
       setCurrentUser(userAuth) //this will return null
-    })
-  }
+    });
 
-  componentWillUnmount(){
-    this.authListener()
-  }
+    return () => {
+      authListener();
+    };
+  }, [])
+
   //use component willunmount to unsuscribe the auth object to prevent memory leaks
 
-  render() {
-    const { currentUser } = this.props;
-
-    return (
-      <div className="App">
-        <Switch>
-          {/* <Route exact path="/" component={Homepage}></Route>
+  return (
+    <div className="App">
+      <Switch>
+        {/* <Route exact path="/" component={Homepage}></Route>
           <Route path="/registration" component={Registration}></Route> */}
-          <Route exact path="/" render={() =>
-            <HomepageLayout>
-              <Homepage />
-            </HomepageLayout>} />
+        <Route exact path="/" render={() =>
+          <HomepageLayout>
+            <Homepage />
+          </HomepageLayout>} />
 
-          <Route path="/registration" render={() =>
-          currentUser?<Redirect to="/"/>:(
+        <Route path="/registration" render={() =>(
             <MainLayout >
               <Registration />
             </MainLayout>)} />
 
-          <Route path="/login" render={() =>
-           currentUser?<Redirect to="/" />: (
+        <Route path="/login" render={() => (
             <MainLayout>
               <Login />
-            </MainLayout> )} />
+            </MainLayout>)} />
 
-          <Route path="/recovery" render={() => (
+        <Route path="/recovery" render={() => (
+          <MainLayout>
+            <Recovery />
+          </MainLayout>)} />
+
+        <Route path="/dashboard" render={() => (
+          <WithAuth>
             <MainLayout>
-              <Recovery/>
-            </MainLayout>)}/>
-        </Switch>
-        {/* Switch will only render the route that match first */}
-      </div>
-    );
-  }
+              <Dashboard />
+            </MainLayout>
+          </WithAuth>
+        )} />
+      </Switch>
+      {/* Switch will only render the route that match first */}
+    </div>
+  );
 }
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser

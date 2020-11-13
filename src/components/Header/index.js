@@ -2,12 +2,12 @@ import React from 'react'
 import './style.scss'
 import Logo from './../../assets/logo.png';
 import { Link } from 'react-router-dom'
-import {auth} from './../../firebase/utils'
-import {connect} from 'react-redux'
+import { auth } from './../../firebase/utils'
+import { connect } from 'react-redux'
 
 
 const Header = (props) => {
-    const {currentUser}  = props
+    const { currentUser } = props
     return (
         <header className="header">
             <div className="wrap">
@@ -21,6 +21,11 @@ const Header = (props) => {
                     {currentUser && (
                         <ul>
                             <li>
+                                <Link to="/dashboard">
+                                    My Account
+                            </Link>
+                            </li>
+                            <li>
                                 <span onClick={() => auth.signOut()}>
                                     LogOut
                                 </span>
@@ -30,17 +35,22 @@ const Header = (props) => {
 
                     {!currentUser && (
                         <ul>
-                        <li>
-                            <Link to="/registration">
-                                Register
+                            <li>
+                                <Link to="/dashboard">
+                                    Dashboard
                             </Link>
-                        </li>
-                        <li>
-                            <Link to="/login">
-                                Login
+                            </li>
+                            <li>
+                                <Link to="/registration">
+                                    Register
                             </Link>
-                        </li>
-                    </ul>
+                            </li>
+                            <li>
+                                <Link to="/login">
+                                    Login
+                            </Link>
+                            </li>
+                        </ul>
                     )}
                 </div>
             </div>
@@ -52,7 +62,7 @@ Header.defaultProps = {
     currentUser: null
 };
 
-const mapStateToProps = ({user}) => ({
+const mapStateToProps = ({ user }) => ({
     currentUser: user.currentUser
 })
 
