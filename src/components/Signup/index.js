@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import './styles.scss'
 
 import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 import { auth, handleUserProfile } from './../../firebase/utils'
-import authWrapper from './../AuthWrapper/index'
 import AuthWrapper from './../AuthWrapper/index'
 
 const initialState = {
@@ -44,7 +43,7 @@ const Signup = props => {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
             await handleUserProfile(user, { displayName });
             resetForm();
-            props.history.push('/');
+            props.history.push('/')
         } catch (error) {
             console.log(error)
         }

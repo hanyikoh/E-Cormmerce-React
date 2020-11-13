@@ -5,7 +5,7 @@ import Button from './../forms/Button/index';
 import { signInWithGoogle, auth } from './../../firebase/utils';
 import FormInput from '../forms/FormInput';
 import AuthWrapper from '../AuthWrapper/index'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const SignIn = (props) => {
 
@@ -25,7 +25,7 @@ const SignIn = (props) => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       resetForm();
-      props.history.push('/');
+      props.history.push('/')
     } catch (error) {
       setErrors([error.message])
     }
