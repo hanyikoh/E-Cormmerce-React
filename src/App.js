@@ -10,14 +10,15 @@ import Login from './pages/Login/index'
 import { auth, handleUserProfile } from './firebase/utils'
 import Recovery from './pages/Recovery/index'
 
-import { connect } from 'react-redux'
-import { setCurrentUser } from './redux/User/uerActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentUser } from './redux/User/userActions'
 import Dashboard from './pages/Dashboard'
 import WithAuth from './hoc/WithAuth'
 
 
 const App = (props) => {
-  const { setCurrentUser, currentUser } = props;
+  // const { setCurrentUser, currentUser } = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged(async userAuth => {
@@ -26,14 +27,16 @@ const App = (props) => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
         userRef.onSnapshot(snapshot => {
-          setCurrentUser({
+          dispatch(setCurrentUser({
             id: snapshot.id,
             ...snapshot.data()
-          })
+          }))
         })
       };
 
-      setCurrentUser(userAuth) //this will return null
+      //If use click logout then the page will reload and run this function againb
+      //then this dispatch will again be called and return null
+      dispatch(setCurrentUser(userAuth)) //this will return null
     });
 
     return () => {
@@ -80,12 +83,12 @@ const App = (props) => {
     </div>
   );
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
-});
+// const mapStateToProps = ({ user }) => ({
+//   currentUser: user.currentUser
+// });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
+// const mapDispatchToProps = dispatch => ({
+//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
