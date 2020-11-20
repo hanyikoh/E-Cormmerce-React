@@ -10,11 +10,15 @@ import Login from './pages/Login/index'
 import { auth, handleUserProfile } from './firebase/utils'
 import Recovery from './pages/Recovery/index'
 
+//components
+import AdminToolbar from './components/AdminToolbar'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { checkUserSession } from './redux/User/userActions'
 import Dashboard from './pages/Dashboard'
 import WithAuth from './hoc/WithAuth'
-
+import Admin from './pages/Admin'
+import WithAdminAuth from './hoc/withAdminAuth'
 
 const App = (props) => {
   // const { setCurrentUser, currentUser } = props;
@@ -22,13 +26,14 @@ const App = (props) => {
 
   useEffect(() => {
     dispatch(checkUserSession());
-  },[]);
+  }, []);
 
 
   //use component willunmount to unsuscribe the auth object to prevent memory leaks
 
   return (
     <div className="App">
+      <AdminToolbar/>
       <Switch>
         {/* <Route exact path="/" component={Homepage}></Route>
           <Route path="/registration" component={Registration}></Route> */}
@@ -37,15 +42,15 @@ const App = (props) => {
             <Homepage />
           </HomepageLayout>} />
 
-        <Route path="/registration" render={() =>(
-            <MainLayout >
-              <Registration />
-            </MainLayout>)} />
+        <Route path="/registration" render={() => (
+          <MainLayout >
+            <Registration />
+          </MainLayout>)} />
 
         <Route path="/login" render={() => (
-            <MainLayout>
-              <Login />
-            </MainLayout>)} />
+          <MainLayout>
+            <Login />
+          </MainLayout>)} />
 
         <Route path="/recovery" render={() => (
           <MainLayout>
@@ -58,6 +63,13 @@ const App = (props) => {
               <Dashboard />
             </MainLayout>
           </WithAuth>
+        )} />
+        <Route path="/admin" render={() => (
+          <WithAdminAuth>
+            <MainLayout>
+              <Admin />
+            </MainLayout>
+          </WithAdminAuth>
         )} />
       </Switch>
       {/* Switch will only render the route that match first */}
