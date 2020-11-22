@@ -11,18 +11,20 @@ const AdminLayout = props => {
     const dispatch = useDispatch();
 
     const signOut = () => {
-        dispatch(signOutUserStart);
+        dispatch(signOutUserStart());
     }
 
     return (
         <div className="adminLayout">
-            <Header {...props}/>
+            <Header {...props} />
             <div className="controlPanel">
                 <div className="sidebar">
                     <VerticalNav>
                         <ul>
                             <li>
-                                <Link to="/admin"></Link>
+                                <Link to="/admin">
+                                    Home
+                                </Link>
                             </li>
                             <li>
                                 <span className="signOut" onClick={() => signOut()}>
