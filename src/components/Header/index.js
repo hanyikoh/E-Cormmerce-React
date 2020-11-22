@@ -1,9 +1,10 @@
 import React from 'react'
+// import {Link} from 'react-router-dom';
 import './style.scss'
 import Logo from './../../assets/logo.png';
 import { Link } from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import {signOutUserStart} from './../../redux/User/userActions'
+import { useSelector, useDispatch } from 'react-redux'
+import { signOutUserStart } from './../../redux/User/userActions'
 // const mapStateToProps = ({ user }) => ({
 //     currentUser: user.currentUser
 // })
@@ -29,6 +30,21 @@ const Header = (props) => {
                         <img src={Logo} alt="MMUbaba Logo" />
                     </Link>
                 </div>
+
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/search">
+                                Search
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
 
                 <div className="callToActions">
                     {currentUser && (

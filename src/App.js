@@ -21,6 +21,7 @@ import Admin from './pages/Admin'
 import WithAdminAuth from './hoc/withAdminAuth'
 import AdminLayout from './layouts/AdminLayout';
 import DashboardLayout from './layouts/DashboardLayout';
+import Search from './pages/Search'
 
 const App = (props) => {
   // const { setCurrentUser, currentUser } = props;
@@ -43,7 +44,11 @@ const App = (props) => {
           <HomepageLayout>
             <Homepage />
           </HomepageLayout>} />
-
+        <Route path="/search" render={()=>(
+          <MainLayout>
+            <Search/>
+          </MainLayout>
+        )}/>
         <Route path="/registration" render={() => (
           <MainLayout >
             <Registration />
