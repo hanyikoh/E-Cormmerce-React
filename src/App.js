@@ -19,6 +19,8 @@ import Dashboard from './pages/Dashboard'
 import WithAuth from './hoc/WithAuth'
 import Admin from './pages/Admin'
 import WithAdminAuth from './hoc/withAdminAuth'
+import AdminLayout from './layouts/AdminLayout';
+import DashboardLayout from './layouts/DashboardLayout';
 
 const App = (props) => {
   // const { setCurrentUser, currentUser } = props;
@@ -59,16 +61,16 @@ const App = (props) => {
 
         <Route path="/dashboard" render={() => (
           <WithAuth>
-            <MainLayout>
+            <DashboardLayout>
               <Dashboard />
-            </MainLayout>
+            </DashboardLayout>
           </WithAuth>
         )} />
         <Route path="/admin" render={() => (
           <WithAdminAuth>
-            <MainLayout>
+            <AdminLayout>
               <Admin />
-            </MainLayout>
+            </AdminLayout>
           </WithAdminAuth>
         )} />
       </Switch>

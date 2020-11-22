@@ -20,9 +20,10 @@ export const handleUserProfile = async ({userAuth, additionalData}) => {
     const userRef = firestore.doc(`users/${uid}`)
     //it will return a user reference on the document uid
     //so now the userRef is referring to the document
-    const snapshot = userRef.get();
-
+    const snapshot = await userRef.get();
+    console.log(snapshot)
     if (!snapshot.exists) {
+        console.log("USER NOT EXIST")
         const { displayName, email } = userAuth;
         const timestamp = new Date();
         const userRoles = ['user'];

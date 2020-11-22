@@ -17,6 +17,8 @@ const useAdminAuth = props => {
         }
 
     },[currentUser])
+
+    return currentUser
 }
 
 export default useAdminAuth;

@@ -34,7 +34,7 @@ const Header = (props) => {
                     {currentUser && (
                         <ul>
                             <li>
-                                <Link to="/dashboard">
+                                <Link to="/admin">
                                     My Account
                             </Link>
                             </li>
