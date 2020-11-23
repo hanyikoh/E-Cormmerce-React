@@ -168,7 +168,7 @@ const Admin = props => {
                                             const {
                                                 productName,
                                                 productThumbnail,
-                                                productPrize,
+                                                productPrice,
                                                 documentID
                                             } = product
 
@@ -181,7 +181,7 @@ const Admin = props => {
                                                         {productName}
                                                     </td>
                                                     <td>
-                                                        RM {productPrize}
+                                                        RM {productPrice}
                                                     </td>
                                                     <Button onClick={() => dispatch(deleteProductStart(documentID))}>
                                                         DELETE
@@ -204,7 +204,7 @@ const Admin = props => {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                {isLastPage && (
+                                                {!isLastPage && (
                                                 <LoadMore {...configLoadMore} />
                                                 )}
                                             </td>

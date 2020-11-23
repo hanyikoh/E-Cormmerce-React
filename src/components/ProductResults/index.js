@@ -76,7 +76,7 @@ const ProductResults = ({ }) => {
     }
 
     const conFigLoadMore = {
-        onLoadMoreEvt: handleLoadMore(),
+        onLoadMoreEvt: handleLoadMore,
     }
 
     return (
