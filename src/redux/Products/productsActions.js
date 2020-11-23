@@ -5,8 +5,10 @@ export const addProductStart = productData => ({
     payload: productData
 })
 
-export const fetchProductsStart = () => ({
-    type: productsTypes.FETCH_PRODUCTS_START
+export const fetchProductsStart = (filters = {}) => ({
+    type: productsTypes.FETCH_PRODUCTS_START,
+    payload: filters
+    //if user not selecting any filter/category then it will be giving a empty object
 })
 
 export const setProducts = products => ({

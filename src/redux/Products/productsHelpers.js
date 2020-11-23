@@ -1,52 +1,67 @@
-import {firestore} from './../../firebase/utils'
+import { firestore } from './../../firebase/utils'
 
 export const handleAddProduct = product => {
     return new Promise((resolve, reject) => {
         firestore
-        .collection('products')
-        .doc()
-        .set(product)
-        .then(()=> {
-            resolve()
-        })
-        .catch(err => {
-            reject(err)
-        })
+            .collection('products')
+            .doc()
+            .set(product)
+            .then(() => {
+                resolve()
+            })
+            .catch(err => {
+                reject(err)
+            })
     })
 }
 
-export const handleFetchProducts = () => {
-    return new Promise((resolve, reject)=> {
-        firestore
-        .collection('products')
-        .orderBy('createdDate')
-        .get()
-        .then(snapshot => {
-            const productsArray = snapshot.docs.map(doc => {
-                return {
-                    ...doc.data(),
-                    documentID: doc.id
-                }
+export const handleFetchProducts = ({ filterType, startAfterDoc, persistProducts=[] }) => {
+    return new Promise((resolve, reject) => {
+        const pageSize = 6;
+
+        let ref = firestore.collection('products').orderBy('createdDate').limit(pageSize);
+        //limit for pagination
+
+        if (filterType) ref = ref.where('productCategory', '==', filterType)
+        if (startAfterDoc) ref = ref.startAfter(startAfterDoc)
+
+        ref
+            .get()
+            .then(snapshot => {
+                const totalCount = snapshot.size;
+
+                const data = [
+                    ...persistProducts,
+                    ...snapshot.docs.map(doc => {
+                        return {
+                            ...doc.data(),
+                            documentID: doc.id,
+                            isLastPage: totalCount < 1
+                        }
+                    })
+                ];
+                resolve({
+                    data,
+                    queryDoc: snapshot.docs[totalCount-1]
+                })
             })
-            resolve(productsArray)
-        })
-        .catch(err => {
-            reject(err)
-        })
+            .catch(err => {
+                reject(err)
+            })
     })
 }
 
 export const handleDeleteProduct = documentID => {
     return new Promise((resolve, reject) => {
         firestore
-        .collection('products')
-        .doc(documentID)
-        .delete()
-        .then(()=> {
-            resolve()
-        })
-        .catch(err => {
-            reject(err)
-        })
+            .collection('products')
+            .doc(documentID)
+            .delete()
+            .then(() => {
+                resolve()
+            })
+            .catch(err => {
+                reject(err)
+            })
     })
 }
