@@ -5,18 +5,20 @@ import Logo from './../../assets/logo.png';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from './../../redux/User/userActions'
+import { selectCartItemsCount } from '../../redux/Cart/cartSelectors';
 // const mapStateToProps = ({ user }) => ({
 //     currentUser: user.currentUser
 // })
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+const mapState = (state) => ({
+    currentUser: state.user.currentUser,
+    totalNumCartItems:selectCartItemsCount(state)
 })
 
 
 const Header = (props) => {
     const dispatch = useDispatch();
-    const { currentUser } = useSelector(mapState);
+    const { currentUser, totalNumCartItems } = useSelector(mapState);
 
     const signOut = () => {
         dispatch(signOutUserStart());
@@ -47,40 +49,45 @@ const Header = (props) => {
                 </nav>
 
                 <div className="callToActions">
-                    {currentUser && (
-                        <ul>
+                    <ul>
+                    <li>
+                        <Link to="/cart">
+                            Your Cart ({totalNumCartItems})
+                        </Link>
+                    </li>
+
+                    {currentUser && [
                             <li>
                                 <Link to="/admin">
                                     My Account
                             </Link>
-                            </li>
+                            </li>,
                             <li>
                                 <span onClick={() => signOut()}>
                                     LogOut
                                 </span>
                             </li>
-                        </ul>
-                    )}
-
-                    {!currentUser && (
-                        <ul>
+                    ]}
+                    {/* we are returning an array here, using comar to seperate it (returning two element) */}
+                    
+                    {!currentUser && [
                             <li>
                                 <Link to="/dashboard">
                                     Dashboard
                             </Link>
-                            </li>
+                            </li>,
                             <li>
                                 <Link to="/registration">
                                     Register
                             </Link>
-                            </li>
+                            </li>,
                             <li>
                                 <Link to="/login">
                                     Login
                             </Link>
                             </li>
-                        </ul>
-                    )}
+                    ]}
+                    </ul>
                 </div>
             </div>
         </header>

@@ -22,6 +22,7 @@ import WithAdminAuth from './hoc/withAdminAuth'
 import AdminLayout from './layouts/AdminLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import Search from './pages/Search'
+import ProductDetails from './pages/Productdetails'
 
 const App = (props) => {
   // const { setCurrentUser, currentUser } = props;
@@ -52,6 +53,11 @@ const App = (props) => {
         <Route path="/search/:filterType" render={()=>(
           <MainLayout>
             <Search/>
+          </MainLayout>
+        )}/>
+        <Route path="/product/:productID" render={()=>(
+          <MainLayout>
+            <ProductDetails/>
           </MainLayout>
         )}/>
         <Route path="/registration" render={() => (

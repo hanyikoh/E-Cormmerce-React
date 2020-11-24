@@ -8,6 +8,7 @@ import FormSelect from './../../components/forms/FormSelect';
 import Button from './../../components/forms/Button';
 import './styles.scss';
 import LoadMore from '../../components/LoadMore';
+import CKEditor from 'ckeditor4-react'
 
 const mapState = ({ productsData }) => ({
     products: productsData.products
@@ -22,6 +23,7 @@ const Admin = props => {
     const [productName, setProductName] = useState('');
     const [productThumbnail, setProductThumbnail] = useState('');
     const [productPrice, setProductPrice] = useState(0);
+    const [productDesc, setProductDesc] = useState('')
 
     const { data, queryDoc, isLastPage } = products;
 
@@ -45,7 +47,8 @@ const Admin = props => {
         setProductCategory('mens'),
         setProductName(''),
         setProductThumbnail(''),
-        setProductPrice(0)
+        setProductPrice(0),
+        setProductDesc('')
     )
 
 
@@ -65,7 +68,8 @@ const Admin = props => {
                 productCategory,
                 productName,
                 productThumbnail,
-                productPrice
+                productPrice,
+                productDesc
             })
         )
 
@@ -140,6 +144,10 @@ const Admin = props => {
                             step="0.01"
                             value={productPrice}
                             handleChange={e => setProductPrice(e.target.value)}
+                        />
+
+                        <CKEditor
+                        onChange={evt => setProductDesc(evt.editor.getData())}
                         />
 
                         <Button type="submit">
