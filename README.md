@@ -174,6 +174,59 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
+```
 
-## ewqqw
+## NPM Reselect
+I am using npm reselect to display the number of items in our cart
+### Install Reselect 
+```npm install reselect```
+
+### Usage in our web app
+1. Create a selector file in our redux folder.
+2. Using the reduce function to return the total quantity of products in our cart
+3. Returning the results
+
+```
+import { createSelector } from 'reselect'
+
+const selectCartData = state => state.cartData;
+
+const selectCartItems = createSelector(
+    [selectCartData],
+    cartData => cartData.cartItems
+)
+
+export const selectCartItemsCount = createSelector(
+    [selectCartItems],
+    cartItems =>
+        cartItems.reduce(
+            (quantity, cartItems) =>
+                quantity + cartItems.quantity
+            , 0)
+)
+```
+4. Call the function in Header
+```
+const mapState = (state) => ({
+    currentUser: state.user.currentUser,
+    totalNumCartItems:selectCartItemsCount(state)
+})
+
+
+const Header = (props) => {
+    const dispatch = useDispatch();
+    const { currentUser, totalNumCartItems } = useSelector(mapState);
+
+    return (
+    ...........
+        <div className="callToActions">
+              <ul>
+                <li>
+                  <Link to="/cart">
+                     Your Cart ({totalNumCartItems})
+                  </Link>
+                </li>
+ ```
+
+
 
