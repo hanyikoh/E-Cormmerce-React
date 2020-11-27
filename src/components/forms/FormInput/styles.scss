@@ -1,5 +1,7 @@
 .formRow{
-    input{
+    input,
+    &.checkoutInput select{ 
+        //if this contains a checkoutInput class
         display: block;
         width:100%;
         font-size: 1.5rem;

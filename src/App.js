@@ -23,6 +23,8 @@ import AdminLayout from './layouts/AdminLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import Search from './pages/Search'
 import ProductDetails from './pages/Productdetails'
+import Cart from './pages/Cart'
+import Payment from './pages/Payment'
 
 const App = (props) => {
   // const { setCurrentUser, currentUser } = props;
@@ -37,7 +39,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <AdminToolbar/>
+      <AdminToolbar />
       <Switch>
         {/* <Route exact path="/" component={Homepage}></Route>
           <Route path="/registration" component={Registration}></Route> */}
@@ -45,31 +47,38 @@ const App = (props) => {
           <HomepageLayout>
             <Homepage />
           </HomepageLayout>} />
-        <Route exact path="/search" render={()=>(
+        <Route exact path="/search" render={() => (
           <MainLayout>
-            <Search/>
+            <Search />
           </MainLayout>
-        )}/>
-        <Route path="/search/:filterType" render={()=>(
+        )} />
+        <Route path="/search/:filterType" render={() => (
           <MainLayout>
-            <Search/>
+            <Search />
           </MainLayout>
-        )}/>
-        <Route path="/product/:productID" render={()=>(
+        )} />
+        <Route path="/product/:productID" render={() => (
           <MainLayout>
-            <ProductDetails/>
+            <ProductDetails />
           </MainLayout>
-        )}/>
+        )} />
         <Route path="/registration" render={() => (
           <MainLayout >
             <Registration />
           </MainLayout>)} />
-
+        <Route path="/cart" render={() => (
+          <MainLayout >
+            <Cart/>
+          </MainLayout>)} />
         <Route path="/login" render={() => (
           <MainLayout>
             <Login />
           </MainLayout>)} />
-
+        <Route path="/payment" render={() => (
+          <MainLayout>
+            <Payment/>
+          </MainLayout>
+        )}/> 
         <Route path="/recovery" render={() => (
           <MainLayout>
             <Recovery />
