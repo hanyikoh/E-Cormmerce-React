@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 
 import cartReducer from './Cart/cartReducer';
 import productsReducer from './Products/productsReducer';
+import formReducer from './Form/formReducer'
 
 import userReducer from './User/userReducer';
 
@@ -12,8 +13,9 @@ export const rootReducer = combineReducers({
     //we persist user through authentication
     productsData: productsReducer,
     //we persist products through route
-    cartData: cartReducer
+    cartData: cartReducer,
     //persist by redux-persist ("whitelist")
+    formData: formReducer
 }); 
 
 const configStorage = {

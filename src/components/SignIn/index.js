@@ -94,14 +94,14 @@ const SignIn = (props) => {
 
           <Button type="submit">
             LogIn
-                </Button>
+          </Button>
 
           <div className="socialSignin">
-            <div className="row">
+            {/* <div className="row"> */}
               <Button onClick={handleGoogleSignIn}>
                 Sign in with Google
               </Button>
-            </div>
+            {/* </div> */}
           </div>
         </form>
       </div>

@@ -5,10 +5,8 @@ export const checkUserIsAdmin = currentUser => {
     const {userRoles} = currentUser;
     console.log(userRoles)
     if(userRoles.includes('admin')){
-        console.log("HELLO")
         return true
     }
-    console.log("HELLO WRONG")
     return false;
 }
 

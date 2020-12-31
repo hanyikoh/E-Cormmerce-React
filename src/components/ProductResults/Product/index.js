@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Button from './../../forms/Button'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addProduct } from '../../../redux/Cart/cartActions'
 
 const Product = (product) => {
@@ -15,7 +15,7 @@ const Product = (product) => {
     } = product
 
     const handleAddToCart = product => {
-        if(!product) return;
+        if (!product) return;
         dispatch(
             addProduct(product)
         )
@@ -54,7 +54,7 @@ const Product = (product) => {
                     </li>
                     <li>
                         <div className="addToCart">
-                            <Button {...configAddToCardBtn} onClick = {() => handleAddToCart(product)}>
+                            <Button {...configAddToCardBtn} onClick={() => handleAddToCart(product)}>
                                 Add to Card
                             </Button>
                         </div>

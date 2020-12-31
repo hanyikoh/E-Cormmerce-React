@@ -33,7 +33,7 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
     // dispatch(setCurrentUser(userAuth)) //this will return null
     // });
   } catch (error) {
-
+    console.log(error)
   }
 }
 
@@ -108,7 +108,7 @@ export function* signUpUser({
     // yield call(handleUserProfile({userAuth: user, additionalData: {displayName}}))
 
   } catch (error) {
-
+    console.log("saga Error", error)
   }
 }
 

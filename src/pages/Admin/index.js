@@ -92,7 +92,7 @@ const Admin = props => {
     return (
         <div className="admin">
 
-            <div className="callToActions">
+            <div className="addNewProductButton">
                 <ul>
                     <li>
                         <Button onClick={() => toggleModal()}>

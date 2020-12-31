@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { store, persistor } from './redux/createStore'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import 'bootstrap/dist/css/bootstrap.css';
 //redux-persist/integration also supports react-native and other platform
 
 ReactDOM.render(

@@ -1,14 +1,16 @@
 .directory {
-    height: 100%;
+    height: 50.0rem;
   
     .wrap {
       display: inline-block;
       width: 100%;
       height: 100%;
+      // justify-content: space-between;
   
       .item {
         position: relative;
-        width: 50%;
+        // width: 50%;
+        width: 100%;
         height: 100%;
         float: left;
         background-position: center;

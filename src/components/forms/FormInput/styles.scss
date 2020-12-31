@@ -2,15 +2,15 @@
     input,
     &.checkoutInput select{ 
         //if this contains a checkoutInput class
-        display: block;
-        width:100%;
-        font-size: 1.5rem;
-        line-height: 1;
-        font-weight: 400;
-        text-align:left;
-        padding: 10px 5px;
-        margin: 10px auto;
-        border:1px solid #9e9e9e;
-        outline: none;
+        display: block !important;
+        width:100% !important;
+        font-size: 1.5rem !important;
+        line-height: 1 !important;
+        font-weight: 400 !important;
+        text-align:left !important;
+        padding: 10px 5px !important;
+        margin: 10px auto !important;
+        border:1px solid #9e9e9e !important;
+        outline: none !important;
     }
 }

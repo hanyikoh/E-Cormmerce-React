@@ -30,3 +30,9 @@ export const setProduct = product => ({
     type: productsTypes.SET_PRODUCT,
     payload: product
 })
+
+export const filterProductsStart = (filters = {}) => ({
+    type: productsTypes.FETCH_PRODUCTS_START,
+    payload: filters
+    //if user not selecting any filter/category then it will be giving a empty object
+})

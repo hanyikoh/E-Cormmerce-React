@@ -14,6 +14,7 @@ GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider)
 
 export const handleUserProfile = async ({userAuth, additionalData}) => {
+    console.log("userAuth", userAuth)
     if (!userAuth) return;
     const { uid } = userAuth;
 
@@ -21,7 +22,7 @@ export const handleUserProfile = async ({userAuth, additionalData}) => {
     //it will return a user reference on the document uid
     //so now the userRef is referring to the document
     const snapshot = await userRef.get();
-    console.log(snapshot)
+    console.log("Snapshot SAY HI",snapshot)
     if (!snapshot.exists) {
         console.log("USER NOT EXIST")
         const { displayName, email } = userAuth;
@@ -37,7 +38,7 @@ export const handleUserProfile = async ({userAuth, additionalData}) => {
                 ...additionalData
             })
         } catch (err) {
-
+            console.log(err)
         }
     }
     return userRef;
